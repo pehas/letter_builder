@@ -1,0 +1,344 @@
+{% load i18n %}{% load coupon_tags %}{% load base_tags %}{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+        body { margin: 0; }
+        {% if not plain %}
+        #source {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            font: bold 17px/1 Arial, sans-serif;
+            padding: 20px 0;
+            background: #edeff4;
+            color: #444;
+            border-bottom: 1px solid #d8dfea;
+            text-shadow: #fff 0 1px 0;
+            box-shadow: #666 0 0 15px;
+        }
+        #source:hover { background: #d8dfea; }
+        {% endif %}
+    </style>
+</head>
+<body>
+
+    {% if not plain %}
+    <a id="source" href="?mime=plain">
+        {% trans "Нажмите для просмотра исходного кода" %}
+    </a>
+    {% endif %}
+    <table class="main-table" bgcolor="#e8f2f5" width="715" style="padding: 0 10px; margin:0 auto; font-family: Arial, Helvetica, sans-serif">
+        <tr>
+            <td>
+                <table width="100%" bgcolor="#f5f5f5">
+                    <tr>
+                        <td width="210" valign="top">
+                            <a href="" target="_blank">
+                                <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/besmart_logo.jpg' %}" alt="BeSmart" width="170" />
+                            </a>
+                        </td>
+                        <td valign="middle" align="center">
+                            <img src="http://allbiz.kz/company/42715-logo.jpg" style="border-radius: 0 0 10px 10px;" alt="BeSmart" width="220" />
+                        </td>
+                        <td valign="middle" align="right" width="130">
+                            <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/visa.jpg' %}" width="120" alt="BeSmart" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr><td style="color: #15819f; font-weight: bold; font-size: 20px;">Внимание!</td></tr>
+        <tr>
+            <td style="font-size: 13px;">
+                Отличная новость от Visa 
+                {% if bank_name %}
+                и {{ bank_name }}
+                {% endif %}
+                !<br> Теперь экономить стало еще проще! Бесплатные скидочные купоны в новом разделе <a href="events/maincat/visa/">VISA</a> на сайте <a href="">BeSmart</a>.
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/how-to.jpg' %}" width="460" style="margin: 20px 20px 0 0" alt="">
+            </td>
+        </tr>
+        <tr><td height="20"></td></tr>
+        <tr align="center">
+            <td>
+                <a href="{{ SITE_URL }}events/maincat/visa/" target="_blank" style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/btn.jpg' %});padding: 5px 70px;background-size: contain;color: white;text-decoration: none;border-radius: 3px;font-size: 10pt;font-weight: bolder;">Подробнее</a>
+            </td>
+        </tr>
+        <tr><td height="20"></td></tr>
+        {% if main_event.getcategoryurl == 'visa' %}
+        <tr>
+            <td>
+                <table cellspacing="5" bgcolor="white" style="border-radius: 7px;" >
+                    <tr>
+                        <td valign="top">
+                            <a href="{{ SITE_URL }}{{ main_event.get_absolute_url }}" target="_blank">
+                                <div style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/slider-line.png' %}); width: 100%; height:4px;position:relative; top:4px;"></div>
+                                <img width="330" src="{{ SITE_URL }}/media/{{ main_event.images.all.0.image }}" alt="" />
+                            </a>
+                        </td>
+                        <td width="5px"></td>
+                        <td valign="baseline">
+                            <table width="100%">
+                                <tr>
+                                    <td colspan="2">
+                                        <span style="font-size:15px;font-weight:bold; font-size:15px; text-align:center">
+                                            {% if main_event.subscribe_text %}
+                                                {{ main_event.subscribe_text.email_title }}
+                                            {% else %}
+                                                {{ main_event.title|safe|truncatechars:60 }}
+                                            {% endif %}
+                                        </span><br/>
+                                        <span style="font-size:14px;display:block;margin:10px 0;">
+                                            {% if main_event.subscribe_text %}
+                                                {{ main_event.subscribe_text.email_description }}
+                                            {% else %}
+                                                {{ main_event.description|safe|truncatechars:100 }}
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" width="100%;">
+                                        <table width="100%;">
+                                            <tr>
+                                                <td width="90">
+                                                    <div style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/slider-line.png' %}); width: 95%; height:4px;position:relative; top:-5px;"></div>
+                                                    <span style="background: url(http://besmart.kz/static/theme/flakes/img/btn-bg.png);padding: 9px 15px;border-radius: 0 0 5px 5px; color:white;font-size:28px;font-weight:bolder;">{{ main_event|get_highest_offer_percent|floatformat }}%</span>
+                                                </td>
+                                                <td valign="top">
+                                                    <div style="position:relative">
+                                                        <span style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/clock.jpg' %}); background-size: contain; padding: 15px 19px; position:relative; top:7px;" ></span> 
+                                                    </div>
+                                                    <span style="position: relative;left: 51px;bottom: 5px;">{{ main_event.valid_stop }}</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr><td height="15"></td></tr>
+                                <tr>
+                                    <td style="font-size:11pt;" valign="middle">
+                                        <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/user_icon.png' %}" alt=""><strong>Получили:</strong> {{ main_event.selled }} чел.
+                                    </td>
+                                    <td width="150px" align="right">
+                                        <a href="{{ SITE_URL }}{{ main_event.get_absolute_url }}" target="_blank" style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/btn.jpg' %});padding: 7px 30px;background-size: contain;color: white;text-decoration: none;border-radius: 3px;font-size: 10pt;font-weight: bolder;">Посмотреть</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        {% endif %}
+        {% for cat in categories %}
+            {% if cat.url == 'visa' %}
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="5px"></td>
+                        </tr>
+                        {% for key, events in event_mixins.items %}
+                            {% if key == cat.id|slugify %}
+                                {% for col in columns %}
+                                    {% if forloop.counter0 == forloop.parentloop.parentloop.counter0 %}
+                                        {% if col == 1 %}
+                                            {% for event in events %}
+                                                <tr>
+                                                    <td valign="top">
+                                                        <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank">
+                                                            <div style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/slider-line.png' %}); width: 100%; height:4px;position:relative; top:4px;"></div>
+                                                            <img width="330" src="{{ SITE_URL }}/media/{{ event.images.all.0.image }}" alt="" >
+                                                        </a>
+                                                    </td>
+                                                    <td width="5px"></td>
+                                                    <td valign="baseline">
+                                                        <table width="100%">
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <span style="font-size:15px;font-weight:bold; font-size:15px;">
+                                                                        {% if event.subscribe_text %}
+                                                                            {{ event.subscribe_text.email_title }}
+                                                                        {% else %}
+                                                                            {{ event.title|safe|truncatechars:60 }}
+                                                                        {% endif %}
+                                                                    </span><br/>
+                                                                    <span style="font-size:14px;display:block;margin:10px 0;">{{ event.description|safe|truncatechars:100 }}</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <table width="100%;">
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div style="position:relative;">
+                                                                                    <span style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/discount_line.png' %}) no-repeat; padding: 2px 43px;position:absolute; top:-9px;"></span>
+                                                                                </div>
+                                                                                <span style="background: url(http://besmart.kz/static/theme/flakes/img/btn-bg.png);padding: 9px 15px;border-radius: 0 0 5px 5px; color:white;font-size:28px;font-weight:bolder;">{{ event|get_highest_offer_percent|floatformat }}%</span>
+                                                                            </td>
+                                                                            <td width="2"></td>
+                                                                            <td valign="top">
+                                                                                <div style="position:relative;">
+                                                                                    <span style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/clock.jpg' %}); padding: 22px 19px; position:absolute; top:-8px;" ></span>
+                                                                                    <span style="margin-left:47px;">{{ event.valid_stop }}</span>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr><td height="15"></td></tr>
+                                                            <tr>
+                                                                <td style="font-size:11pt;" valign="middle">
+                                                                    <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/user_icon.png' %}" alt=""><strong>Получили:</strong>
+                                                                </td>
+                                                                <td width="200px" align="right">
+                                                                    <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank" style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/btn.jpg' %});padding: 7px 30px;background-size: contain;color: white;text-decoration: none;border-radius: 3px;font-size: 10pt;font-weight: bolder;">Посмотреть</a>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% elif col == 2 %}
+                                            <tr>
+                                                {% for event in events %}
+                                                    <td>
+                                                        <table width="330px" bgcolor="white" style="box-shadow: 1px 1px 0.4em #ccc;border-radius:4px;">
+                                                            <tr>
+                                                                <td colspan="2" style="font-size:13px;" valign="baseline">
+                                                                    {% if event.subscribe_text %}
+                                                                        {{ event.subscribe_text.email_title }}
+                                                                    {% else %}
+                                                                        {{ event.title|safe|slice:'100' }}
+                                                                    {% endif %}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2" style="position:relative;padding:0;">
+                                                                    <div style="position:relative; z-index:100">
+                                                                        <div style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/slider-line.png' %}); width: 100%; height:4px;position:relative; top:4px;"></div>
+                                                                    </div>
+                                                                    <div style="float:right;">
+                                                                        <span style="background: url(http://besmart.kz/static/theme/flakes/img/btn-bg.png);padding: 4px 7px;border-radius: 0 0 5px 5px;color: white;font-size: 19px;font-weight: bolder; position:absolute;background-size: contain;right: 5px;">{{ event|get_highest_offer_percent|floatformat }}%</span>
+                                                                    </div>
+                                                                    <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank">
+                                                                        <img width="330" src="{{ SITE_URL }}/media/{{ event.images.all.0.image }}" alt="" >
+                                                                    </a>
+                                                                    <div style="float:right">
+                                                                        <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/visa_logo.png' %}" alt="" style="position:absolute;bottom:4px;right:4px;">
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2" style="height:6px"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td height="30px;" style="font-weight:bold;font-size:13px;">
+                                                                    <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/clock-min.jpg' %}" alt="" style="">
+                                                                    <span style="font-size:9pt;font-weight:bold;position:relative;bottom:5px;">{{ event.valid_stop|date:"d M Y" }}</span>
+                                                                </td>
+                                                                <td align="right">
+                                                                    <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank" style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/btn.jpg' %});padding: 7px 29px;background-size: contain;color: white;text-decoration: none;border-radius: 3px;font-size: 10pt;font-weight: bolder;">Посмотреть</a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="height:10px"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    {% if not forloop.counter|divisibleby:'2' and not forloop.last %}
+                                                        <td style="width:15px"></td>
+                                                    {% else %}
+                                                        </tr>
+                                                        <tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                        {% elif col == 3 %}
+                                            <tr>
+                                                {% for event in events %}
+                                                    <td style="margin:0;padding:0">
+                                                        <table bgcolor="white" width="221px" style="box-shadow: 1px 1px 0.4em #ccc;border-radius:4px;" cellpadding="6">
+                                                            <tr>
+                                                                <td colspan="2" height="40px">
+                                                                    <a href="{{ event.get_absolute_url }}" style="font-weight:bold;color:#000;text-decoration:none;font-size:13px" target="_blank">
+                                                                        {% if event.subscribe_text %}
+                                                                            {{ event.subscribe_text.email_title }}
+                                                                        {% else %}
+                                                                            {{ event.title|safe|slice:'57' }}
+                                                                        {% endif %}
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2" style="position:relative;padding:0;">
+                                                                    <div style="position:relative; z-index:100">
+                                                                        <div style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/slider-line.png' %}); width: 100%; height:4px;position:relative; top:4px;"></div>
+                                                                    </div>
+                                                                    <div style="float:right;">
+                                                                        <span style="background: url(http://besmart.kz/static/theme/flakes/img/btn-bg.png);padding: 4px 7px;border-radius: 0 0 5px 5px;color: white;font-size: 19px;font-weight: bolder; position:absolute;background-size: contain;right: 5px;">{{ event|get_highest_offer_percent|floatformat }}%</span>
+                                                                    </div>
+                                                                    <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank">
+                                                                        <img src="{{ SITE_URL }}/media/{{ event.images.all.0.image }}" style="width:100%;" alt="" >
+                                                                    </a>
+                                                                    <div style="float:right">
+                                                                        <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/visa_logo.png' %}" alt="" style="position:absolute;bottom:4px;right:4px;">
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top">
+                                                                    <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/clock-min.jpg' %}" alt="" style="">
+                                                                    <span style="font-size:9pt;font-weight:bold;position:relative;bottom:5px;">{{ event.valid_stop|date:"d M Y" }}</span>
+                                                                </td>
+                                                                <td align="right">
+                                                                    <div style="margin:5px -5px 5px 0;">
+                                                                        <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank" style="background: url({{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_bank/btn.jpg' %});padding: 5px 9px;background-size: contain;color: white;text-decoration: none;border-radius: 3px;font-size:10pt;font-weight:bolder;">Посмотреть</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    {% if not forloop.counter|divisibleby:'3' and not forloop.last %}
+                                                        <td style="width:17px"></td>
+                                                    {% else %}
+                                                        </tr>
+                                                        <tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        <tr><td height="20"></td></tr>
+        <tr>
+            <td align="center" style="color:#005487; font-size:9pt;">Присоединяйтесь к Visa в социальных сетях:</td>
+        </tr>
+        <tr>
+            <td align="center">
+                <a href="https://www.facebook.com/visaazerbaijan" target="_blank">
+                    <img src="{{ SITE_URL }}{% static 'theme/light/images/registration-popup/face.png' %}" alt="">
+                </a>
+            </td>
+        </tr>
+        <tr><td height="20"></td></tr>
+    </table>
+</body>

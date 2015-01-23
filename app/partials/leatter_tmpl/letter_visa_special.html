@@ -1,0 +1,239 @@
+{% load i18n %}{% load coupon_tags %}{% load base_tags %}{% load static %}
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta charset="utf-8">
+  <style>
+    body { margin: 0; }
+    {% if not plain %}
+      #source {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        font: bold 17px/1 Arial, sans-serif;
+        padding: 20px 0;
+        background: #edeff4;
+        color: #444;
+        border-bottom: 1px solid #d8dfea;
+        text-shadow: #fff 0 1px 0;
+        box-shadow: #666 0 0 15px;
+      }
+      #source:hover { background: #d8dfea; }
+    {% endif %}
+  </style>
+</head>
+<body>
+  {% if plain %}
+	  <a id="source" href="?mime=plain">
+	    {% trans "Нажмите для просмотра исходного кода" %}
+	  </a>
+  {% endif %}
+  <table width="650" style="background: url('{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_special/bg.jpg' %}') repeat-x; padding: 4px 10px;margin:0 auto; font-family: Arial, Helvetica, sans-serif">
+    <tr>
+      <td width="600" colspan="3" style="color: #f7b600; font-size: 11px;">
+        {% blocktrans with url=SITE_URL task=task_id %}
+          Просмотрите письмо на <a href="{{ url }}/subscribe/newsletter/{{ task }}/" target="_blank" style="color:#949494">сайте</a>, 
+          если у вас возникли проблемы с его отображением в почтовом ящике.
+        {% endblocktrans %}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {% if language == 'az' %}
+          <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_special/logo_az.png' %}" alt="BeSmart">
+        {% else %}
+          <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_special/logo.jpg' %}" alt="BeSmart">
+        {% endif %}
+      </td>
+      <td valign="center" style="color: white; font-weight: bolder;font-size:23px;">
+        <p style="text-align:center;">{% trans 'Visa совместно с BeSmart представляют:' %}</p>
+      </td>
+      <td valign="right">
+        <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_special/visa.png' %}" alt="">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <span style="color:white;font-size:22px;">{% trans 'Новые возможности Вашей карты Visa' %}</span><br>
+        <span style="color:#f7b600;margin-top:10px;display:inline-block; font-size:14px;">
+          {% blocktrans with url=SITE_URL %}
+            Бесплатные скидочные купоны в новом разделе <a style="color:#f7b600;" href="{{ url }}/events/maincat/visa/">Visa</a> 
+            на сайте BeSmart. Теперь экономить стало еще проще!
+          {% endblocktrans %}
+        </span>
+      </td>
+      <td valign="right">
+          <img style="float:right;" src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_special/visa-card.png' %}" alt="">
+      </td>
+    </tr>
+    <tr style="margin-top:0px;">
+      <td colspan="3">
+        <table style="font-family: Arial, Helvetica, sans-serif; border-spacing:0;">
+          <tr>
+            <td colspan="3" style="padding: 0;">
+              {% if language == 'az' %}
+                <img style="float:right;" src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_special/visa_banner_az.png' %}" alt="">
+              {% else %}
+                <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_special/card-bg.jpg' %}" style="width: 100%; height:auto; " alt="">
+              {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <table bgcolor="#0a2b64">
+              <tr style="height: 2px;"></tr>
+                <td colspan="3">
+                  <p style="padding: 10px 20px; font-size:14px; color: #edaf09;text-align: justify;">
+                    {% blocktrans %}
+                      Visa обеспечивает доступ держателям карт, торгово-сервисным предприятиям, финансовым и правительственным учреждениям в более чем 200 странах мира к быстрой, безопасной и надежной сети электронных платежей. Электронные платежи осуществляются посредством глобальной инновационной процессинговой системы Visa Net, которая способна обрабатывать более 24 000 транзакций в секунду, обеспечивая защиту от мошенничества для потребителей и гарантии осуществления платежей для торгово-сервисных предприятий.
+                    {% endblocktrans %}
+                  </p>
+                </td>
+              </tr>
+              <tr><td width="650" height="10"></td></tr>
+              <tr>
+                <td colspan="3">
+                  
+                  {% if language == 'az' %}
+                    <p style="text-align:center; margin-top:10px;">
+                      <a href="{{ SITE_URL }}/events/maincat/visa/" style="background-image: url({{ SITE_URL }}{% static 'theme/light/images/visa_az/visa_buy_btn-full.png' %});padding:10px 133px;color: #003ea9;text-decoration: none;background-repeat: no-repeat;" alt="">
+                        {% trans 'Подробнее' %}
+                      </a>
+                    </p>
+                  {% else %}
+                    <p style="text-align:center; margin-top:10px;">
+                      <a href="{{ SITE_URL }}/events/maincat/visa/">
+                        <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_special/more.png' %}" alt="">
+                      </a>
+                    </p>
+                  {% endif %}
+                </td>
+              </tr>
+              <tr><td width="650" height="40"></td></tr>
+              <tr>
+                <td colspan="3" style="padding: 4px 0 4px 20px;color:#fff;font-size:17px;border-radius:13px;-moz-border-radius:13px;-o-border-radius:13px;-webkit-border-radius:10px; text-shadow: 1px 1px 0.3em #565656">
+                  <span>{% trans 'Экономить с Visa легко!' %}</span>&#32;<span style="color: #f7b600;">{% trans 'Бесплатные купоны!' %}</span>
+                  <span style="float:right; margin-right: 15px;">
+                    <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/visa-logo.png' %}">
+                  </span>
+                </td>
+              </tr>
+              {% for cat in categories %}
+                {% if cat.url == 'visa' %}
+                  {% for key, events in event_mixins.items %}
+                    {% for col in columns %}
+                      {% if forloop.counter0 == forloop.parentloop.parentloop.counter0 %}
+                        {% if col == 3 %}
+                          <tr>
+                            {% for event in events %}
+	                            <td>
+                                <table width="221px" style="background-color: white; border:1px solid #ccc;border-radius: 6px 6px 0 0">
+                                  <tr>
+                                    <td colspan="2" height="40px" align="center"><a href="{{ SITE_URL }}{{ event.get_absolute_url }}" style="font-weight:bold;color:#000;text-decoration:none;font-size:13px" target="_blank">{{ event.title|safe|slice:'75' }}...</a> </td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="2"><a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank"><img src="{{ SITE_URL }}/media/{{ event.images.all.0.image }}" width="214" alt="" /></a></td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="2" style="font-size:13px;" height="80px" valign="baseline">{{ event.description|safe|striptags|slice:'100' }}...</td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="2" height="5px"></td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="2" height="30px;" align="center" colspan="2" style="font-weight:bold;font-size:13px;border-top:1px solid #ccc;border-bottom:1px solid #ccc">
+                                      {% trans "Цена" %}:
+                                      <span style="color:#fff;padding:10px 16px 13px 10px;background:url({{ SITE_URL }}/static/theme/light/images/subscribe/modified/web20.png) no-repeat;">
+                                        {{ event|get_highest_offer_percent|floatformat }}%
+                                      </span>
+                                      <span style="color:#017ece">
+	                                      {% trans 'Бесплатно' %}
+                                      </span>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="2" height="5px"></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                        <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/btn-2.png" alt="" /></a>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            {% endfor %}
+                          </tr>
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+              <tr>
+                <td colspan="3">
+                    <p style="text-align:center;color:#edaf09;font-size:14px;margin-top:10px;">{% trans 'Присоединяйтесь к Visa в социальных сетях:' %}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <a href="https://www.facebook.com/visaazerbaijan" target="_blank">
+                    <img style="margin-left:320px;" src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_special/facebook.png' %}" alt="">
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <p style="text-align:center;color:#edaf09;margin:7px 0;font-size:14px;">
+                    <a href="{{ SITE_URL }}/events/maincat/visa/" style="color:#edaf09;">
+                      {% trans 'Перейдя по этой ссылке, вы можете просмотреть все наши акции и предложения' %}
+                    </a>
+                  </p>
+                </td>
+              </tr>
+              <tr style="color: #f7b600">
+                <td colspan="1">
+	                <a href="https://play.google.com/store/apps/details?id=kz.beemobile.besmart" target="_blank">
+	                  <img style="margin-left:20px;" src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/visa_special/google.png' %}" alt="">
+		              </a>
+                </td>
+                <td width="916" colspan="1">
+                  <ul style="font-size:12px;padding:0;margin:0;">
+                    <li><a href="{{ SITE_URL }}/pages/partners/" target="_blank" style="list-style:none;color:#edaf09;font-size:13px">{% trans "Разместите себя на BeSmart" %}</a></li>
+                    <li><a href="{{ SITE_URL }}/bonus/" target="_blank" style="list-style:none;color:#edaf09;font-size:13px">{% trans "Бонусные акции для активных подписчиков" %}</a></li>
+                  </ul>
+                </td>
+                <td width="248" colspan="1">
+                  <ul style="font-size:12px;margin:0;padding:0;">
+                    <li style="list-style:none;font-size:14px;">(012) 404-85-57</li>
+                    <li style="list-style:none;">info@besmart.az</li>
+                  </ul>
+                </td>
+              </tr>
+            </table>
+          </tr>
+          <tr>
+            <td colspan="3">
+                <table style="padding: 10px 14px;margin:0 auto; font-family: Arial, Helvetica, sans-serif">
+                    <tr style="font-size:11px; color: white">
+                        <td colspan="3">
+                          {% blocktrans %}
+                            Вы получили это письмо, так как являетесь одним из пользователей BeSmart и согласились получать рассылку сообщений.<br><br>
+                            Не отвечайте, пожалуйста, на них — они рассылаются автоматически.<br><br>
+                            Чтобы наши письма доходили до вас всегда корректно — внесите, пожалуйста e-mail адрес info@besmart.az в свою адресную книгу<br><br>
+                            В разделе управления рассылкой вы можете подробно настроить, какие письма вы хотите получать, как часто и с каким содержанием.<br><br>
+                            Если вы хотите отписаться от нашей рассылки - это можно сделать здесь. Но зачем?<br><br>
+                            Адрес: Ул. Сулеймана Рагимова 179А. Avenue Veraj 5-й этаж<br><br>
+                            Пользовательское соглашение<br><br>
+                            © BeSmart, 2012
+                          {% endblocktrans %}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+	</body>

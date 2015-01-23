@@ -1,0 +1,237 @@
+{% load i18n %}
+{% load static %}
+{% load coupon_tags %}
+{% load thumbnail %}
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<table width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#ccc"><tr><td align="center" valign="top"><!-- bg -->
+<table width="740" bgcolor="#fff"> <!-- body --><tr><td align="center" valign="top">
+<table width="685" cellpadding="0" cellspacing="0" valign="top"><!--header-->
+  <tr>
+    <td align="left" valign="top" rowspan="2">
+      <a href="{{ SITE_URL }}" target="_blank">
+        {% if language == 'ka' %}
+        <img src="{{ SITE_URL }}/static/theme/light/images/subscribe/logo-ge.jpg" alt="" />
+        {% else %}
+        <img src="{{ SITE_URL }}/static/theme/light/images/subscribe/logo.jpg" alt="" />
+        {% endif %}
+      </a>
+    </td>
+    <td align="left" rowspan="2">
+      <table>
+        <tr>
+          <td>
+            <a href="{{ SITE_URL }}/page/how_it_work/" style="color:#6f6f6f !important; font-family:Arial, Helvetica, sans-serif; font-size:13px;">{% trans 'Как это работает?' %}</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="{{ SITE_URL }}/pages/partners/" style="color:#6f6f6f !important; font-family:Arial, Helvetica, sans-serif; font-size:13px;">{% trans 'Для вашего бизнеса' %}</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="{{ SITE_URL }}/pages/feedback/" style="color:#6f6f6f !important; font-family:Arial, Helvetica, sans-serif; font-size:13px;">{% trans 'Контактная информация' %}</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="110" rowspan="2">&nbsp;
+
+    </td>
+    <td align="right" valign="middle" height="40">
+      <table cellpadding="0" cellspacing="5">
+        <tr>
+          <td align="right">
+            {% if BESMART_LOCATION == 'KZ' %}
+                <a href="http://www.facebook.com/BeSmart.KZ" target="_blank" class="fb"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/facebook.png" alt=""></a>&nbsp;
+                <a href="http://vk.com/besmart_kz" target="_blank" class="vk"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/vkontakte.png" alt=""></a>&nbsp;
+                <a href="https://twitter.com/BeSmart_kz" target="_blank" class="tw"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/twitter.png" alt=""></a>&nbsp;
+                <a href="http://www.odnoklassniki.ru/besmart.kz" target="_blank" class="ok"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/odnoklassniki.png" alt=""></a>&nbsp;
+                <a href="http://instagram.com/besmartkz" target="_blank" class="inst"><img src="{{ SITE_URL }}/static/theme/light/images/instagram-icon-hover.png" alt=""></a>&nbsp;
+                <a href="http://my.mail.ru/community/besmart_kz/?ref=hs" target="_blank" class="mailru-icon"><img src="{{ SITE_URL }}/static/theme/light/images/mail-icon-hover.png" alt=""></a>&nbsp;
+                <a href="{{ SITE_URL }}/blog/" target="_blank" class="blog"><img src="{{ SITE_URL }}/static/theme/light/images/blog_icon-hover.png" alt=""></a>
+            {% elif BESMART_LOCATION == 'KG' %}
+                <a href="http://www.facebook.com/BeSmart.KG" target="_blank" class="fb"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/facebook.png" alt=""></a>&nbsp;
+                <a href="https://twitter.com/BeSmartKG" target="_blank" class="tw"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/twitter.png" alt=""></a>&nbsp;
+                <a href="http://instagram.com/besmartkg" target="_blank" class="inst"><img src="{{ SITE_URL }}/static/theme/light/images/instagram-icon-hover.png" alt=""></a>&nbsp;
+                <a href="http://www.odnoklassniki.ru/besmartkg" target="_blank" class="ok"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/odnoklassniki.png" alt=""></a>&nbsp;
+            {% elif BESMART_LOCATION == 'AZ' %}
+                <a href="http://www.facebook.com/pages/BeSmartAz/402538009812346" class="fb" target="_blank"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/facebook.png" alt=""></a>&nbsp;
+{#                            <a href="http://twitter.com/besmartaz" target="_blank" class="tw" target="_blank"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/twitter.png" alt=""></a>&nbsp;#}
+                <a href="http://www.odnoklassniki.ru/profile/561356139264" target="_blank" class="ok"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/odnoklassniki.png" alt=""></a>&nbsp;
+                <a href="http://www.5thvillage.me/u/besmartaz/" target="_blank" class="inst"><img src="{{ SITE_URL }}/static/theme/light/images/instagram-icon-hover.png" alt=""></a>&nbsp;
+                <a href="http://www.linkedin.com/company/besmart-azerbaijan" target="_blank" class="linked"><img src="{{ SITE_URL }}/static/theme/light/images/linked-h.png" alt=""></a>&nbsp;
+            {% elif BESMART_LOCATION == 'GE' %}
+                <a href="http://www.facebook.com/Besmart.ge" style='background-position: -432px -73px' target="_blank">&nbsp;</a>
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="right" valign="bottom" height="60">
+      &nbsp;
+    </td>
+  </tr>
+  <tr bgcolor="#000" height="1">
+    <td colspan="4">
+    </td>
+  </tr>
+</table><!--header-->
+
+{% if promo_text %}
+<!-- promo-text -->
+<table width="685" cellpadding="0" cellspacing="5" valign="top">
+  <tr>
+    <td>{{ promo_text|safe }}</td>
+  </tr>
+  <tr bgcolor="#000" height="1">
+    <td>
+    </td>
+  </tr>
+</table>
+<!-- promo-text -->
+{% endif %}
+
+<table width="700" cellpadding="0" cellspacing="0" valign="top"><!-- container -->
+  <tr>
+    <td>
+      <table cellspacing="10"><!-- content -->
+        <tr>
+          <td width="505" valign="top">
+            <table><!-- left -->
+              {% for event in main_event.all %}
+              <tr>
+                <td>
+                  <table><!-- post -->
+                    <tr>
+                      <td>
+                        <table>
+                          <tr>
+                            <td align="center">
+                              <strong style="font-size:75px;" >{{ event|get_highest_offer_percent|floatformat }}%</strong>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <strong style="font-size:22px;">{{ event.offers.all|get_lowest_offer|floatformat }} {{ currency_text }}</strong>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <a href="{{ SITE_URL }}{{ event.get_absolute_url }}">
+                                {% if language == 'ka' %}
+                                <img src="{{ SITE_URL }}/static/theme/light/images/subscribe/view-ge.jpg" alt="იხილეთ">
+                                {% else %}
+                                <img src="{{ SITE_URL }}/static/theme/light/images/subscribe/view.jpg" alt="">
+                                {% endif %}
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td>
+                        <a href="{{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}{% thumbnail event.images.all.0.image 309x211 crop="smart" %}" alt="" width="309" height="211"></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="color:#0291eb;">
+                        {{ event.title|safe }}
+                      </td>
+                    </tr>
+                  </table><!-- post -->
+                </td>
+              </tr>
+              {% endfor %}
+            </table><!-- left -->
+          </td>
+          <td width="190" valign="top">
+            <table><!-- right -->
+              {% for event in events %}
+              <tr>
+                <td align="left">
+                  <a href="{{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}{% thumbnail event.images.all.0.image 166x136 crop="smart" %}" alt="" width="166" height="136"></a>
+                  <table cellspacing="5">
+                    <tr>
+                      <td width="160" align="left">
+                        <strong style="color:#929292; font-family:Arial, Helvetica, sans-serif;">
+                          <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" style="color: #929292;">
+                            {{ event.title|safe|slice:':30' }}...
+                          </a>
+                        </strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="160" align="left">
+                        <span style="color:#0291eb; font-family:Arial, Helvetica, sans-serif;"><b>{% trans 'Скидка' %}: {{ event|get_highest_offer_percent|floatformat }}%</b></span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              {% endfor %}
+            </table><!-- right -->
+          </td>
+        </tr>
+      </table><!-- content -->
+      <table width="700" cellpadding="0" cellspacing="0" valign="top"><!-- footer -->
+        <tr>
+          <td width="10" rowspan="4"> </td>
+          <td colspan="4">
+            <img src="{{ SITE_URL }}/static/theme/light/images/subscribe/line-1.jpg">
+          </td>
+        </tr>
+        <tr>
+          <td>  <img src="{{ SITE_URL }}/static/theme/light/images/subscribe/BeSmart.png" alt=""> </td>
+          <td> </td>
+          <td>
+            <a href="{{ SITE_URL }}/pages/partners/" style=" color:#000 !important;">{% trans 'Разместите себя на BeSmart' %}</a><br>
+            <a href="{{ SITE_URL }}/bonus/" style=" color:#000 !important;">{% trans 'Бонусные акции для активных подписчиков' %}</a><br>
+          </td>
+          <td>
+            {{ phones.0 }}<br>
+            {{ phones.1 }}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ info_email }}
+            {% if not LOCATION_AZ %}
+                <br>
+                <img src="{{ SITE_URL }}/static/theme/light/images/subscribe/skype.png" alt="" align="middle">{{ skype }}
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <img src="{{ SITE_URL }}/static/theme/light/images/subscribe/line-2.png" alt="">
+          </td>
+        </tr>
+        <tr>
+          <td width="160">
+
+          </td>
+          <td width="15" >
+
+          </td>
+          <td colspan="2">
+            {% blocktrans %}
+            <strong>BeSmart</strong> – это лучшие заведения вашего города с огромными скидками!<br>
+            Каждый день мы предлагаем что-то новое: рестораны, салоны красоты<br>
+            картинг, спа, кинотеатры. И все это по уникальной цене<br><br>
+            {% endblocktrans %}
+            <a href="{{ SITE_URL }}/pages/eula/" style=" color:#000 !important;">{% trans 'Пользовательское соглашение' %}</a><br><br>
+            © BeSmart, 2013
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table><!-- container-->
+</td></tr></table><!--bg-->
+
+
+<style type="text/css">
+  * { margin: 0 !important; padding: 0 !important; }
+</style>

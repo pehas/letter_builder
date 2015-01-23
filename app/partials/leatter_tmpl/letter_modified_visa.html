@@ -1,0 +1,628 @@
+{% load i18n %}{% load coupon_tags %}{% load base_tags %}{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+        body { margin: 0; }
+        {% if not plain %}
+        #source {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            font: bold 17px/1 Arial, sans-serif;
+            padding: 20px 0;
+            background: #edeff4;
+            color: #444;
+            border-bottom: 1px solid #d8dfea;
+            text-shadow: #fff 0 1px 0;
+            box-shadow: #666 0 0 15px;
+        }
+        #source:hover { background: #d8dfea; }
+        {% endif %}
+    </style>
+</head>
+<body>
+    {% if not plain %}
+    <a id="source" href="?mime=plain">
+        {% trans "Нажмите для просмотра исходного кода" %}
+    </a>
+    {% endif %}
+    <table class="main-table" width="715" style="margin:0 auto; font-family: Arial, Helvetica, sans-serif">
+        {% if task_id %}
+        <tr>
+            <td style="font-size:13px;color:#949494">{% blocktrans %}Просмотрите письмо на <a href="{{ SITE_URL }}/subscribe/newsletter/{{ task_id }}/" target="_blank" style="color:#949494">сайте</a>, если у вас возникли проблемы с его отображением в почтовом ящике.{% endblocktrans %}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td>
+                <table width="100%" bgcolor="#f5f5f5" style="border-radius:10px 10px 0 0;border-top:1px solid #ccc;">
+                    <tr>
+                        <td width="210">
+                            <a href="{{ SITE_URL }}" target="_blank">
+                                {% if language == 'ka' %}
+                                    <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/logo-ge.jpg' %}" alt="BeSmart" />
+                                {% elif language == 'kk' %}
+                                    <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/logo-kk.jpg' %}" alt="BeSmart" />
+                                {% elif language == 'az' %}
+                                    <img src="{% static 'theme/light/images/subscribe/modified/logo-az.png' %}" alt="BeSmart" />
+                                {% else %}
+                                    <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/logo.jpg' %}" alt="BeSmart" />
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td width="19px"></td>
+                        <td>
+                            <ul style="list-style: none; width: 100%; margin-bottom: 0; padding-bottom: 0; padding-left: 0; margin-top: 33px;">
+                                <li>
+                                    <a href="{{ SITE_URL }}/coupons/" target="_blank" style="color:#6f6f6f;font-size:13px;">
+                                        {% trans "Мои купоны" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ SITE_URL }}/profile/" target="_blank" style="color:#6f6f6f;font-size:13px;">
+                                        {% trans "Личный кабинет" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ SITE_URL }}/login/?email={{ email }}&amp;hash={{ hash }}&amp;next=/profile/subscribe/edit/" target="_blank" style="color:#6f6f6f;font-size:13px;">
+                                        {% trans "Настроить рассылку" %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                        <td width="320px" align="right" valign="bottom" style="color:#898989;font-size:13px;">{% trans "Следуйте за нами" %}: <br />
+                            {% if BESMART_LOCATION == 'KZ' %}
+                                <a href="http://www.facebook.com/BeSmart.KZ" target="_blank" class="fb"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/facebook.png" alt=""></a>&nbsp;
+                                <a href="http://vk.com/besmart_kz" target="_blank" class="vk"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/vkontakte.png" alt=""></a>&nbsp;
+                                <a href="https://twitter.com/BeSmart_kz" target="_blank" class="tw"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/twitter.png" alt=""></a>&nbsp;
+                                <a href="http://www.odnoklassniki.ru/besmart.kz" target="_blank" class="ok"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/odnoklassniki.png" alt=""></a>&nbsp;
+                                <a href="http://instagram.com/besmartkz" target="_blank" class="inst"><img src="{{ SITE_URL }}/static/theme/light/images/instagram-icon-hover.png" alt=""></a>&nbsp;
+                                <a href="http://my.mail.ru/community/besmart_kz/?ref=hs" target="_blank" class="mailru-icon"><img src="{{ SITE_URL }}/static/theme/light/images/mail-icon-hover.png" alt=""></a>&nbsp;
+                                <a href="{{ SITE_URL }}/blog/" target="_blank" class="blog"><img src="{{ SITE_URL }}/static/theme/light/images/blog_icon-hover.png" alt=""></a>
+                            {% elif BESMART_LOCATION == 'KG' %}
+                                <a href="http://www.facebook.com/BeSmart.KG" target="_blank" class="fb"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/facebook.png" alt=""></a>&nbsp;
+                                <a href="https://twitter.com/BeSmartKG" target="_blank" class="tw"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/twitter.png" alt=""></a>&nbsp;
+                                <a href="http://instagram.com/besmartkg" target="_blank" class="inst"><img src="{{ SITE_URL }}/static/theme/light/images/instagram-icon-hover.png" alt=""></a>&nbsp;
+                                <a href="http://www.odnoklassniki.ru/besmartkg" target="_blank" class="ok"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/odnoklassniki.png" alt=""></a>&nbsp;
+                            {% elif BESMART_LOCATION == 'AZ' %}
+                                <a href="http://www.facebook.com/pages/BeSmartAz/402538009812346" class="fb" target="_blank"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/facebook.png" alt=""></a>&nbsp;
+                                <!-- <a href="http://twitter.com/besmartaz" target="_blank" class="tw" target="_blank"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/twitter.png" alt=""></a>&nbsp; -->
+                                <a href="http://www.odnoklassniki.ru/profile/561356139264" target="_blank" class="ok"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/odnoklassniki.png" alt=""></a>&nbsp;
+                                <a href="http://www.5thvillage.me/u/besmartaz/" target="_blank" class="inst"><img src="{{ SITE_URL }}/static/theme/light/images/instagram-icon-hover.png" alt=""></a>&nbsp;
+                                <a href="http://www.linkedin.com/company/besmart-azerbaijan" target="_blank" class="linked"><img src="{{ SITE_URL }}/static/theme/light/images/linked-h.png" alt=""></a>&nbsp;
+                            {% elif BESMART_LOCATION == 'GE' %}
+                                <a href="http://www.facebook.com/Besmart.ge" style='background-position: -432px -73px' target="_blank">&nbsp;</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% if welcome_heading or welcome_text %}
+                    <tr>
+                        <td colspan="4" style="padding-left:20px;border-bottom:1px solid #ccc;">
+                            {% if welcome_heading %}
+                                <font face="Arial, Helvetica, sans-serif" size="4" color="#000000" style="font-size:20px; display:block; margin: 10px 0; line-height:25px; color:#000000; font-weight:normal;">
+                                    <b>{{ welcome_heading|safe }}</b>
+                                </font>
+                            {% endif %}
+                            {% if welcome_text %}
+                                <font face="Arial, Helvetica, sans-serif" size="2" color="#000000" style="display: block; margin-bottom: 15px; font-size:15px; line-height:19px;">
+                                    {{ welcome_text|striptags|safe }}
+                                </font>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% if campaign %}
+                    <tr>
+                        <td colspan="4" cellspacing="0" cellpadding="0"  height="400px"  style="border-top:1px solid #ccc;vertical-align: top">
+                            <table cellspacing="0" cellpadding="0" align="center" width="710px">
+                                <tr>
+                                    <td  style="background:url({{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/subscribediscount_banner-bg.png' %}) no-repeat;">
+                                        <table style="width:340px;float:right;margin-top:20px;">
+                                <tr>
+                                    <td width="25%"></td>
+                                    <td width="68%" align="center" style="color:#e83365;font-size:20px">{{ campaign.min_buy_amount|floatformat }}</td>
+                                    <td width="33%"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="padding-top:70px;color:#0071bc;font-size:17px;" align="center">Воспользуйтесь акцией,
+                                        стоимостью {{ campaign.min_buy_amount|floatformat }} {{ currency_text }}
+                                        или выше</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="padding-top:50px;color:#0071bc;" align="center">Получите скидку на сертификат
+                                            <span style="color:#e83365">{{ campaign.special_discount|floatformat }}</span> {{ currency_text }} <span style="color:red">*МГНОВЕННО!</span></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                                        <table cellpadding="0" cellspacing="0" style="clear:both;margin-top:360px; width:686px">
+                                <tr><!--old color : #e83365 -->
+                                    <td align="right" style="color:#0000FF;padding-bottom:15px; text-align: right">
+                                        Данное предложение действительно только для Вашего аккаунта и воспользоваться предложением с иного аккаунта невозможно. Срок действия скидки <b>до {{ campaign.valid_date|date:"d F, Y" }}</b> включительно.
+                                        <span style="font-size:x-small"><br/>Детально ознакомится с условиями данного предложения Вы можете из текста находящимся под списком предлагаемых акций.</span>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="background:url({{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/subscribediscount_arrow.png' %}) no-repeat -7px 0px;height:42px;color:#f5f5f5;vertical-align: top;padding-top:3px;font-size:18px">Ниже вы увидите список лучших акций, которые включены в это предложение</td>
+                                </tr>
+                            </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </td>
+        </tr>
+        {% if  message %}
+            <tr>
+                <td style="width: 100%; height: 2px; border-top: 1px solid #ccc;"></td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="font-weight: 100; padding: 10px 5px;">{{ message|safe }}</p>
+                </td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td style="width: 100%; height: 2px; border-top: 1px solid #ccc;"></td>
+        </tr>
+        <!-- Featured event -->
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <a href="{{ SITE_URL }}{{ main_event.get_absolute_url }}" target="_blank">
+                                <img width="352" src="{{ SITE_URL }}/media/{{ main_event.images.all.0.image }}" alt="" style="border-radius:7px;" />
+                            </a>
+                        </td>
+                        <td width="5px"></td>
+                        <td valign="baseline">
+                            <table width="100%">
+                                <tr>
+                                    <td colspan="2">
+                                        <span style="font-size:15px;font-weight:bold">
+                                        {% if main_event.subscribe_text.email_title %}
+                                            {{ main_event.subscribe_text.email_title|safe }}
+                                        {% else %}
+                                            {{ main_event.title|safe|truncatechars:80  }}
+                                        {% endif %}
+                                        </span>
+                                        <br>
+                                        <span style="font-size:14px;display:block;margin:10px 0;">
+                                            {% if main_event.subscribe_text.email_description %}
+                                                {{ main_event.subscribe_text.email_description|safe }}
+                                            {% else %}
+                                                {{ main_event.description|safe|truncatechars:285 }}
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="30px;" colspan="2" style="font-weight:bold;font-size:13px;border-top:1px solid #ccc;border-bottom:1px solid #ccc">{% trans "Скидка" %}: <span style="color:#fff;padding:10px 16px 13px 10px;background:url({{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/web20.png' %}) no-repeat;">{{ main_event|get_highest_offer_percent|floatformat }}%</span>{% trans "Цена" %}: <span style="color:#017ece">{{ main_event.offers.all|get_lowest_offer|floatformat }}
+                                        {% if main_event.bonus %}
+                                            {{ main_event.offers.all|get_lowest_offer|floatformat|choose_only_plural:_("бонус,бонуса,бонусов") }}
+                                        {% else %}
+                                            {{ currency_text }}
+                                        {% endif %}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:13px 0">
+                                        <a href="{{ SITE_URL }}{{ main_event.get_absolute_url }}" target="_blank">
+                                            {% if BESMART_LOCATION == 'GE' %}
+                                                <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/ge_view.jpg' %}" alt="" />
+                                            {% else %}
+                                                <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/btn.png' %}" alt="" />
+                                            {% endif %}
+                                        </a>
+                                    </td>
+                                    <td width="200px" align="right">
+                                        <span style="font-size:12px; color:#767676;">{% trans 'Поделиться ссылкой:' %}</span><br />
+                                        <a href="http://www.facebook.com/sharer.php?u={{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/face-i.png" alt="" /></a>
+                                        <a href="http://vkontakte.ru/share.php?url={{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/vk-i.png" alt="" /></a>
+                                        <a href="http://twitter.com/share?url={{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/tw-i.png" alt="" /></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 100%; height: 10px; border-top: 1px solid #ccc;"></td>
+        </tr>
+        {% for cat in categories %}
+        <tr>
+            <td {% if cat.url == 'visa' %}style="background-color: #002388; border-radius: 6px; padding: 0 14px 4px 14px;"{% endif %}>
+                <table width="100%">
+                <tr>
+                        <td colspan="5" style="
+                        {% if forloop.counter0 == 1 and cat.url != 'visa' %}
+                            background:#986ba5; font-weight:bold;
+                        {% elif forloop.counter0 == 2 and cat.url != 'visa' %}
+                            background:#abc64f; font-weight:bold;
+                        {% elif  cat.url != 'visa' %}
+                            background:#20beda; font-weight:bold;
+                        {% endif %}
+                        padding: 4px 0 4px 20px;color:#fff;font-size:17px;border-radius:13px;-moz-border-radius:13px;-o-border-radius:13px;-webkit-border-radius:10px; text-shadow: 1px 1px 0.3em #565656">
+                    {% if cat.url == 'visa' %}
+                        <span>{% trans 'Экономить с Visa легко!' %}</span>&#32;<span style="color: #f7b600;">Бесплатные купоны!</span>
+                        <span style="float:right; margin-right: 15px;">
+                            <img src="{% static 'theme/light/images/subscribe/modified/visa-logo.png' %}">
+                        </span>
+                        
+                    {% elif cat.id > 0 %}
+                        {% if BESMART_LOCATION == 'GE' %}
+                            {{ cat.title_ka|safe }}
+                        {% else %}
+                            {{ cat.title|safe }}
+                        {% endif %}
+                    {% else %}
+                        {% trans 'Бонусные' %}
+                    {% endif %}
+                    </td>
+                </tr>
+                {% if cat.url != 'visa' %}
+                <tr>
+                    <td colspan="2" height="5px"></td>
+                </tr>
+                {% endif %}
+
+                {% for key, events in event_mixins.items %}
+
+                    {% if key == cat.id|slugify %}
+
+                        {% for col in columns %}
+
+                            {% if forloop.counter0 == forloop.parentloop.parentloop.counter0 %}
+
+                                {% if col == 1 %}
+
+                                    {% for event in events %}
+                                        <tr {% if event.getcategoryurl == 'visa' %}style="background-color: white; border:1px solid #ccc;border-radius: 6px 6px 0 0"{% else %}style="border:1px solid #ccc;"{% endif %}>
+                                            <td><a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank"><img width="250" src="{{ SITE_URL }}/media/{{ event.images.all.0.image }}" alt="" /></a></td>
+                                            <td width="5px"></td>
+                                            <td valign="baseline">
+                                                <table width="100%">
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <span style="font-size:14px;font-weight:bold">
+                                                                {% if event.subscribe_text.email_title %}
+                                                                    {{ event.subscribe_text.email_title }}
+                                                                {% else %}
+                                                                    {{ event.title|safe }}
+                                                                {% endif %}
+                                                            </span><br />
+                                                            <span style="font-size:13px;display:block;margin:10px 0;">
+                                                                {% if event.subscribe_text.email_description %}
+                                                                    {{ event.subscribe_text.email_description|safe }}
+                                                                {% else %}
+                                                                    {{ event.description|safe|striptags|slice:'95' }}
+                                                                {% endif %}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td height="30px;" colspan="2" style="font-weight:bold;font-size:12px;border-top:1px solid #ccc;border-bottom:1px solid #ccc">{% trans "Скидка" %}: <span style="color:#fff;padding:10px 16px 13px 10px;background:url({{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/web20.png' %}) no-repeat;">{{ event|get_highest_offer_percent|floatformat }}%</span>{% trans "Цена" %}: <span style="color:#017ece">{{ event.offers.all|get_lowest_offer|floatformat }}
+                                                        {% if event.bonus %}
+                                                            {{ event.offers.all|get_lowest_offer|floatformat|choose_only_plural:_("бонус,бонуса,бонусов") }}
+                                                        {% else %}
+                                                            {{ currency_text }}
+                                                        {% endif %}
+                                                        </span></td></tr>
+                                                        <tr>
+                                                            <td style="padding:13px 0">
+                                                                <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank">
+                                                                    {% if BESMART_LOCATION == 'GE' %}
+                                                                        <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/ge_view-2.jpg' %}" alt="" />
+                                                                    {% else %}
+                                                                        <img src="{{ SITE_URL }}{% static 'theme/light/images/subscribe/modified/btn-2.png' %}" alt="" />
+                                                                    {% endif %}
+
+                                                                </a>
+                                                            </td>
+                                                            <td width="200px" align="right">
+                                                                <span style="font-size:12px; color:#767676;">{% trans 'Поделиться ссылкой:' %}</span><br />
+                                                                <a href="http://www.facebook.com/sharer.php?u={{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/face-i.png" alt="" /></a>
+                                                                <a href="http://vkontakte.ru/share.php?url={{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/vk-i.png" alt="" /></a>
+                                                                <!-- \\\\\<a href="http://connect.odnoklassniki.ru/dk?st.cmd=WidgetShare&st.shareUrl={{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/ok-i.png" alt="" /></a> -->
+                                                                <a href="http://twitter.com/share?url={{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/tw-i.png" alt="" /></a>
+                                                            </td>
+                                                        </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                {% elif col == 2 %}
+
+                                    <tr>
+                                        {% for event in events %}
+                                            <td>
+                                                <table width="330" height="286" {% if event.getcategoryurl == 'visa' %}style="background-color: white; border:1px solid #ccc;border-radius: 6px 6px 0 0"{% else %}style="border:1px solid #ccc;"{% endif %}>
+                                                    <tr {% if cat.url == 'visa' %}style="background-color: white; border-radius: 6px 6px 0 0;"{% endif %}>
+                                                        <td colspan="2"><a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank"><img width="330" src="{{ SITE_URL }}/media/{{ event.images.all.0.image }}" alt="" /></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" style="font-size:13px;" valign="baseline">
+                                                            {% if event.subscribe_text.email_title %}
+                                                                {{ event.subscribe_text.email_title|safe|truncatechars:100 }}
+                                                            {% else %}
+                                                                {{ event.title|safe|truncatechars:100 }}
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <a href="http://www.facebook.com/sharer.php?u={{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/face-i.png" alt="" /></a>
+                                                            <a href="http://vkontakte.ru/share.php?url={{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/vk-i.png" alt="" /></a>
+                                                            <!-- \\\\\<a href="http://connect.odnoklassniki.ru/dk?st.cmd=WidgetShare&st.shareUrl={{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/ok-i.png" alt="" /></a> -->
+                                                            <a href="http://twitter.com/share?url={{ SITE_URL }}{{ event.get_absolute_url }}"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/tw-i.png" alt="" /></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" style="height:6px"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td height="30px;" style="font-weight:bold;font-size:13px;border-top:1px solid #ccc;border-bottom:1px solid #ccc">
+                                                        {% trans "Скидка" %}: 
+                                                        <span style="color:#fff;padding:10px 16px 13px 10px;background:url({{ SITE_URL }}/static/theme/light/images/subscribe/modified/web20.png) no-repeat;">
+                                                            {{ event|get_highest_offer_percent|floatformat }}%
+                                                        </span>{% trans "Цена" %}: <span style="color:#017ece">
+                                                        {{ event.offers.all|get_lowest_offer|floatformat }}
+                                                        {% if event.bonus %}
+                                                            {{ event.offers.all|get_lowest_offer|floatformat|choose_only_plural:_("бонус,бонуса,бонусов") }}
+                                                        {% else %}
+                                                            {{ currency_text }}
+                                                        {% endif %}
+                                                        </span></td>
+                                                        <td align="right">
+                                                            {% if BESMART_LOCATION == 'GE' %}
+                                                                <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/ge_view-2.jpg" alt="" /></a>
+                                                            {% else %}
+                                                                <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/btn-2.png" alt="" /></a>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="height:10px"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            {% if not forloop.counter|divisibleby:'2' and not forloop.last %}
+                                                <td style="width:15px"></td>
+                                            {% else %}
+                                                </tr>
+                                                <tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+
+                                {% elif col == 3 %}
+
+                                    <tr>
+                                        {% for event in events %}
+                                             <td>
+                                                <table width="221px" {% if event.getcategoryurl == 'visa' %}style="background-color: white; border:1px solid #ccc;border-radius: 6px 6px 0 0"{% else %}style="border:1px solid #ccc;"{% endif %}>
+                                                    <tr>
+                                                        <td colspan="2" height="40px" align="center">
+                                                            <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" style="font-weight:bold;color:#000;text-decoration:none;font-size:13px" target="_blank">
+                                                                {% if event.subscribe_text.email_title %}
+                                                                    {{ event.subscribe_text.email_title|safe }}
+                                                                {% else %}
+                                                                    {{ event.title|safe|slice:'75' }}
+                                                                {% endif %}
+                                                            </a> 
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"><a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank"><img src="{{ SITE_URL }}/media/{{ event.images.all.0.image }}" width="214" alt="" /></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" style="font-size:13px;" height="80px" valign="baseline">
+                                                            {% if event.subscribe_text.email_description %}
+                                                                {{ event.subscribe_text.email_description|safe }}
+                                                            {% else %}
+                                                                {{ event.description|safe|striptags|slice:'100' }}
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" height="5px"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" height="30px;" align="center" colspan="2" style="font-weight:bold;font-size:13px;border-top:1px solid #ccc;border-bottom:1px solid #ccc">
+                                                            {% trans "Скидка" %}: 
+                                                            <span style="color:#fff;padding:10px 16px 13px 10px;background:url({{ SITE_URL }}/static/theme/light/images/subscribe/modified/web20.png) no-repeat;">
+                                                                {{ event|get_highest_offer_percent|floatformat }}%
+                                                            </span>
+                                                            <span style="color:#017ece">
+                                                                {% if event.getcategoryurl == 'visa' %}
+                                                                    {% trans 'Бесплатно' %}
+                                                                {% else %}
+                                                                    {{ event.offers.all|get_lowest_offer|floatformat }}
+                                                                    {% if event.bonus %}
+                                                                        {{ event.offers.all|get_lowest_offer|floatformat|choose_only_plural:_("бонус,бонуса,бонусов") }}
+                                                                    {% else %}
+                                                                        {{ currency_text }}
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" height="5px"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td  height="30px"><a href="#"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/face-i.png" alt="" /></a>
+                                                            <a href="#"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/vk-i.png" alt="" /></a>
+                                                            <a href="#"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/ok-i.png" alt="" /></a>
+                                                            <a href="#"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/tw-i.png" alt="" /></a>
+                                                        </td> -->
+                                                        <td align="right">
+                                                            {% if BESMART_LOCATION == 'GE' %}
+                                                                <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/ge_view-2.jpg" alt="" /></a>
+                                                            {% else %}
+                                                                <a href="{{ SITE_URL }}{{ event.get_absolute_url }}" target="_blank"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/btn-2.png" alt="" /></a>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            {% if not forloop.counter|divisibleby:'3' and not forloop.last %}
+                                                <td style="width:17px"></td>
+                                            {% else %}
+                                                </tr>
+                                                <tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                {% endif %}
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </table>
+            </td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <td>
+                <table width="100%" style="margin-top:30px;">
+                    <tr>
+                        <td height="60px" align="center" colspan="3" style="color:#949494; font-size:13px">
+                            {% blocktrans %}Перейдя по этой <a href="{{ SITE_URL }}/events/?lang={{ language }}" target="_blank" style="color:#949494">ссылке</a>, вы можете просмотреть все наши акции и предложения{% endblocktrans %}
+                            <img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/line.jpg" style="margin-top:20px;" alt="" />
+                        </td>
+                    </tr>
+                    {% if campaign %}
+                    <tr>
+                        <td height="60px" align="left" colspan="3" style="color:#949494; font-size:13px">
+                            Данное предложение распространяется только на акции стоимостью от {{ campaign.min_buy_amount|floatformat }} {{ currency_text }} или выше.
+                            Объем скидки на сертификат, независимо от его стоимости, остается фиксированным - {{ campaign.special_discount|floatformat }} {{ currency_text }}.
+                            <b>Скидка действует только на покупку одного сертификата по одной акции и засчитывается СРАЗУ при покупке</b>.
+                            То есть Вы оплачиваете на {{ campaign.special_discount|floatformat }} {{ currency_text }} меньше стоимости сертификата.
+                            Сертификаты, купленные по этому предложению, возврату не подлежат.
+
+                            <img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/line.jpg" style="margin-top:20px;" alt="" />
+                        </td>
+
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td align="center">
+                            <a href="https://play.google.com/store/apps/details?id=kz.beemobile.besmart" target="_blank"><img src="{{ SITE_URL }}/static/theme/light/images/androidapp/google-play-blue.png" alt="" /></a>
+                            <br/>
+                            <a href="https://itunes.apple.com/ru/app/besmart/id722174259?mt=8"><img src="{{ SITE_URL }}/static/theme/light/images/androidapp/app-store-blue.png" alt="Установите приложение" /></a>
+                        </td>
+                        <td>
+	                        <ul style="list-style:none;margin-left:-40px;">
+                            <li><a href="{{ SITE_URL }}/pages/partners/" target="_blank" style="color:#abc64f;font-size:13px">{% trans "Разместите себя на BeSmart" %}</a></li>
+                            <li><a href="{{ SITE_URL }}/pages/jobs/" target="_blank" style="color:#000;font-size:13px">{% trans "Вакансии на BeSmart" %}</a></li>
+                            <li><a href="{{ SITE_URL }}/bonus/" target="_blank" style="color:#000;font-size:13px">{% trans "Бонусные акции для активных подписчиков" %}</a></li>
+                            
+                          </ul>
+                        </td>
+                        <td>
+                            {% for phone in phones %}
+                                {{ phone }}<br />
+                            {% endfor %}<br /><br />
+                            {% if BESMART_LOCATION == 'KZ' %}
+                                <span style="font-size:15px;margin-left:25px;padding-top:10px;"><a href="mailto:info@besmart.kz">info@besmart.kz</a></span> <br />
+                            {% elif BESMART_LOCATION == 'KG' %}
+                                <span style="font-size:15px;margin-left:25px;padding-top:10px;"><a href="mailto:info@besmart.kg">info@besmart.kg</a></span> <br />
+                            {% elif BESMART_LOCATION == 'AZ' %}
+                                <span style="font-size:15px;margin-left:25px;padding-top:10px;"><a href="mailto:info@besmart.az">info@besmart.az</a></span> <br />
+                            {% else %}
+                                <span style="font-size:15px;margin-left:25px;padding-top:10px;"><a href="mailto:support@besmart.{{ BESMART_LOCATION|lower }}">support@besmart.{{ BESMART_LOCATION|lower }}</a></span> <br />
+                            {% endif %}
+                            {% if BESMART_LOCATION != 'KZ' and BESMART_LOCATION != 'AZ' %}
+                                <span style="font-size:15px"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/skype.jpg" style="margin-right:5px;" alt="" />
+                                    {% if BESMART_LOCATION == 'KG' %}
+                                        besmartkg
+                                    {% elif BESMART_LOCATION == 'GE' %}
+                                        BeSmart.Georgia
+                                    {% else %}
+                                        besmartsupport
+                                    {% endif %}
+                                </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <table style="color:#939393;font-size:11px">
+                                <tr>
+                                    <td height="10px" colspan="2"><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/line2.jpg" alt="" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">{% trans "Вы получили это письмо, так как являетесь одним из пользователей BeSmart и согласились получать рассылку сообщений. Не отвечайте, пожалуйста, на них — они рассылаются автоматически." %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10px" colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/icon1.png" style="margin-top:-13px" alt="" /></td>
+                                    <td>
+                                        {% blocktrans %}Чтобы наши письма доходили до вас всегда корректно — внесите, пожалуйста e-mail адрес <a href="mailto:{{ info_email }}" style="color:#939393;font-size:11px">{{ info_email }}</a> в свою адресную книгу{% endblocktrans %}
+                                    </td>
+                                </tr>
+                                <!-- <tr>
+                                    <td height="10px" colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/icon2.png" style="margin-top:-13px" alt="" /></td>
+                                    <td>В разделе <a href="#" style="color:#939393;font-size:11px">управления рассылкой</a> вы можете подробно настроить, какие письма вы хотите получать, как часто и с каким содержанием.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10px" colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{ SITE_URL }}/static/theme/light/images/subscribe/modified/icon3.png" alt="" /></td>
+                                    <td>Если вы хотите отписаться от нашей рассылки - это можно сделать <a href="#" style="color:#939393;font-size:11px">здесь</a>. Но зачем?
+                                    </td>
+                                </tr> -->
+                                <tr>
+                                    <td height="10px" colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td height="10px" colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><a href="{{ SITE_URL }}/pages/eula/" target="_blank" style="color:#939393;font-size:11px">{% trans "Пользовательское соглашение" %}</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10px" colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">&copy; BeSmart, 2014</td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</body>

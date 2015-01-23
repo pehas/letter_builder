@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" ng-app="subscribeApp">
+<head>
+  <meta charset="utf-8">
+  <title>Build Letter</title>
+  <link rel="stylesheet" href="css/app.css">
+
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/services.js"></script>
+</head>
+<body>
+
+  <div ng-controller="SubscribeCtrl">
+      <form method="post" >
+          <label>Города категорий</label>
+          <select>
+              <option ng-repeat="city in cityes">
+                  {{city}}
+              </option>
+          </select>
+          <label>Язык рассылки</label>
+          <select>
+              <option ng-repeat="language in languages">
+                  {{language}}
+              </option>
+          </select>
+          <label for="template">Шаблон</label>
+          <select name="temaplate">
+              <option ng-repeat="template in templates">
+                  {{template}}
+              </option>
+          </select>
+          Шапка<input ng-model="head_code" /><br />
+          Заголово<input ng-model="title" /><br />
+          <label for="message">Сообщение</label>
+          <input name="message" ng-model="message" />
+          <select>
+              <option ng-repeat="main_action in main_actions">
+                  {{main_action}}
+              </option>
+          </select>
+
+          <label for="category">Категория</label>
+          <select name ="category">
+              <option ng-repeat="category in categorys ">
+                  {{category}}
+              </option>
+          </select>
+
+          Фильтр:<input ng-model="searchText" />
+          <label for="categoryes"></label>
+          <select name="categoryes" multiple>
+              <option ng-repeat="category_action in category_actions | filter:searchText ">
+                  {{category_action}}
+              </option>
+          </select>
+          <button>добавить еще </button>
+
+          <br />Произвольный код:<input ng-model="custom_code" />
+          <br />Код подвала:<input ng-model="footer_code" /><br />
+
+          <textarea>{{head_code+title+message+main_actions+categorys+custom_code+footer_code}}</textarea>
+
+
+          <br /><input type="submit" value="Отправить"/>
+
+
+      </form>
+  </div>
+
+</body>
+</html>
